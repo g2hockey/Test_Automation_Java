@@ -23,6 +23,8 @@ public class FirefoxBrowser implements Driver {
 	public WebDriver createDriver() {
 		//Maximize() causes geckodriver to crash in some versions
 		//driver.manage().window().maximize();
+		//driver.manage().window().fullscreen();
+		
 		return driver;
 		
 	}

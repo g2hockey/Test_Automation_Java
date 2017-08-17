@@ -56,8 +56,7 @@ public class SeleniumHelpers {
 			log.info("Element found with " + type + ": " + locator);
 
 		}catch(Exception e){
-			log.info("Element not found with " + type + ": "  + locator);
-			e.printStackTrace();
+			log.error("Element not found with " + type + ": "  + locator, e);
 
 		}
 		
@@ -73,8 +72,7 @@ public class SeleniumHelpers {
 				log.info("Clicked on element found with " + type + ": " + locator);
 			}
 		}catch(Exception e){
-			log.info("Cannot click on element found with " + type + ": " + locator);
-			e.printStackTrace();
+			log.error("Cannot click on element found with " + type + ": " + locator, e);
 		}
 	}
 	
@@ -84,8 +82,7 @@ public class SeleniumHelpers {
 			log.info("Clicked on element found with element: " + element.getTagName());
 
 		}catch(Exception e){
-			log.info("Cannot click on element found with element: " + element.getTagName());
-			e.printStackTrace();
+			log.error("Cannot click on element found with element: " + element.getTagName(), e);
 		}
 	}
 	
@@ -99,9 +96,8 @@ public class SeleniumHelpers {
                         " locatorType: " + type);
 			}
 		}catch(Exception e){
-			log.info("Cannot send data on the element with locator: " + locator +
-		                  " locatorType: " + type);
-			e.printStackTrace();
+			log.error("Cannot send data on the element with locator: " + locator +
+		                  " locatorType: " + type, e);
 
 		}
     }
@@ -114,8 +110,7 @@ public class SeleniumHelpers {
     		log.info("Sent data on element : " + element.getTagName());
 
     	}catch(Exception e){
-    		log.info("Cannot send data on the element : " + element.getTagName());
-    		e.printStackTrace();
+    		log.error("Cannot send data on the element : " + element.getTagName(), e);
 
     	}
     }
@@ -131,9 +126,8 @@ public class SeleniumHelpers {
                         " locatorType: " + type);
 			}
 		}catch(Exception e){
-			log.info("Cannot clear text on the element with locator: " + locator + 
-						" locatorType: " + type);
-				e.printStackTrace();
+			log.error("Cannot clear text on the element with locator: " + locator + 
+						" locatorType: " + type, e);
 
 		}
     }
@@ -145,9 +139,8 @@ public class SeleniumHelpers {
     		log.info("Clear text on element : " + element.getTagName());
 
     	}catch(Exception e){
-    		log.info("Cannot clear text on the element : " + element.getTagName());
-    		e.printStackTrace();
-
+    		log.error("Cannot clear text on the element : " + element.getTagName(), e);
+   
     	}
     }
 
@@ -160,8 +153,7 @@ public class SeleniumHelpers {
     		log.info("Selected option on element with locator: " + locator +
                       " locatorType: " + type);
     	}catch(Exception e){
-    		log.info("Cannot select on the element with locator: " + locator + " locatorType: " + type);
-    		e.printStackTrace();
+    		log.error("Cannot select on the element with locator: " + locator + " locatorType: " + type, e);
 
     	}
     }
@@ -183,9 +175,8 @@ public class SeleniumHelpers {
                 result = false;
         	}
         }catch(Exception e){
-        	log.info("Element not found " + locator );
+        	log.error("Element not found " + locator, e );
 			result = false;
-			e.printStackTrace();
         }
         
         return result;
@@ -213,9 +204,8 @@ public class SeleniumHelpers {
 			}
 
 		}catch(Exception e){
-			log.info("Element not found " + locator );
+			log.error("Element not found " + locator, e );
 			isDisplayed = false;
-			e.printStackTrace();
 		}
 
 		return isDisplayed;
@@ -225,16 +215,16 @@ public class SeleniumHelpers {
 		WebElement element = null;
 		
 		try{
-			log.info("Waiting for max 10 seconds for element to be available");
+			log.info("Waiting for max 15 seconds for element to be available");
 			
 			By byElement = this.getByType(locator, type);
-			WebDriverWait wait = new WebDriverWait(driver,10);
+			WebDriverWait wait = new WebDriverWait(driver,15);
 			element = wait.until(ExpectedConditions.visibilityOfElementLocated(byElement));
 			
 			log.info("Element: " + locator + " found on page");
 		}catch(Exception e){
-			log.info("Element: " + locator + " not appear on page");
-			e.printStackTrace();
+			log.error("Element: " + locator + " not appear on page", e);
+		
 		}
 		
 		return element;
@@ -253,8 +243,7 @@ public class SeleniumHelpers {
 			
 			log.info("Element: " + element.getText() + " found on page");
 		}catch(Exception e){
-			log.info("Element not appear on page");
-			e.printStackTrace();
+			log.error("Element not appear on page", e);
 		}
 		
 		return elem;

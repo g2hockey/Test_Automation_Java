@@ -22,7 +22,8 @@ public class WebDriverFactory {
 
 	public WebDriverFactory(String browser){
 		this.log = LogManager.getLogger(this.getClass().getName());
-
+		manager = null;
+		
 		if(browser.equalsIgnoreCase(DriverTypes.FIREFOX)){
 			manager = new FirefoxBrowser();
 		}else if(browser.equalsIgnoreCase(DriverTypes.IEXPLORER)){
@@ -34,17 +35,15 @@ public class WebDriverFactory {
 		}else if(browser.equalsIgnoreCase(DriverTypes.MOBILE_APP)){
 			manager = new MobileNative();
 		}else{
-			manager = null;
 			log.error("Cannot find applicable browser: " + browser);
 		}
 	}
 	
 	public WebDriver getDriver(){
+		driver = null;
 		if(manager != null){
 			driver = manager.createDriver();
 			driver.manage().timeouts().implicitlyWait(20000, TimeUnit.MILLISECONDS);
-		}else{
-			driver = null;
 		}
 		return driver;
 	}
